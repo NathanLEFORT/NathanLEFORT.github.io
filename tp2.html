@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<header>
+		
+		<title>tp1</title>
+
+	</header>
+
+	<body>
+
+		<canvas id=canvas></canvas>
+		<button id="button">restart</button>
+
+	</body>
+
+	<script>
+		
+		var canvas = document.getElementById("canvas");
+		var x = 100
+		this.canvas.height = 210;
+		this.canvas.width = window.innerWidth;
+		if(canvas.getContext) {
+			var ctx = canvas.getContext("2d");	
+		}
+
+		this.ctx.fillStyle = 'rgb(255,0,0)';
+		this.ctx.fillRect(x,100,100,100);
+
+		var timer = window.setInterval(move, 2);
+
+		function move() {
+			if(x <= this.canvas.width) {
+				ctx.clearRect(x, 100, 100, 100);
+				x = this.x + 6;
+				ctx.fillRect(x, 100,100,100);
+			} else {
+				window.clearInterval(timer);
+			}
+		}
+
+
+		const button = document.getElementById("button");
+		this.button.addEventListener('click', function(event) {
+			window.clearInterval(timer);
+			ctx.clearRect(x, 100, 100, 100);
+			x = 100;
+			timer = window.setInterval(move, 2);
+		});
+
+	</script>
+
+</html>

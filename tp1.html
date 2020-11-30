@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+	<header>
+		
+		<title>tp1</title>
+
+	</header>
+
+	<body>
+
+		<a id="compteur"></a>
+
+	</body>
+
+	<script>
+		
+		var compteurHTML = document.getElementById("compteur");
+		var compteurINT = 10;
+		var timer = window.setInterval(compteARebourd, 1000);
+
+		function compteARebourd() {
+			if(this.compteurINT >= 0) {
+				console.log(compteurINT);
+				this.compteurHTML.innerHTML = compteurINT;
+				this.compteurINT--;
+			} else {
+				window.clearInterval(timer);
+			}
+		}
+
+	</script>
+
+</html>

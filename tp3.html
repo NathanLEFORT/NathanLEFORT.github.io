@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+	<header>
+		
+		<title>tp1</title>
+
+	</header>
+
+	<body>
+
+		<canvas id=canvas></canvas>
+		<button id="button">restart</button>
+
+	</body>
+
+	<script>
+
+		class Carre {
+
+			constructor(ctx, y, startTime) {
+				this.x = 100;
+				this.y = y;
+				this.startTime = startTime;
+				this.ctx = ctx
+
+				this.ctx.fillStyle = 'rgb(255,0,0)';
+				this.ctx.fillRect(this.x, this.y, 100, 100);
+			}
+
+			move(timeSinceStart) {
+				if(timeSinceStart >= this.startTime) {
+					this.clear();
+					this.update();
+					this.draw();
+				}
+			
+			}
+
+			clear() {
+				this.ctx.clearRect(this.x, this.y, 100,100);
+			}
+
+			update() {
+				this.x = this.x + 10;
+			}
+
+			draw() {
+				this.ctx.fillRect(this.x, this.y, 100, 100);
+			}
+
+		}
+		
+		//Déclaration du canvas
+		var canvas = document.getElementById("canvas");
+		this.canvas.height = window.innerHeight;
+		this.canvas.width = window.innerWidth;
+		if(canvas.getContext) {
+			var ctx = canvas.getContext("2d");	
+		}
+
+		//Timer depuis le début
+		var timeSinceStart = 0;
+
+		//Déclaration du carré
+		var carre = new Carre(ctx, 100, 100);
+
+		//Mouvement
+		var timer = window.setInterval(test, 10);
+
+		function test() {
+			timeSinceStart++;
+			carre.move(timeSinceStart);
+		}
+
+		const button = document.getElementById("button");
+		this.button.addEventListener('click', function(event) {
+			window.clearInterval(timer);
+			carre.clear();
+			carre.x = 100;
+			timer = window.setInterval(test, 10);
+		});
+
+	</script>
+
+</html>

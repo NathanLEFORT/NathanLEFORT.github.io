@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+	<header>
+		
+		<title>tp1</title>
+
+	</header>
+
+	<body>
+
+		<canvas id=canvas></canvas>
+		<button id="button">restart</button>
+
+	</body>
+
+	<script>
+
+		class Carre {
+
+			constructor(ctx, y, startTime) {
+				this.x = 100;
+				this.y = y;
+				this.startTime = startTime;
+				this.ctx = ctx
+
+				this.ctx.fillStyle = 'rgb(255,0,0)';
+				this.draw();
+			}
+
+			move(timeSinceStart) {
+				if(timeSinceStart >= this.startTime) {
+					this.clear();
+					this.update();
+					this.draw();
+				}
+			
+			}
+
+			clear() {
+				this.ctx.clearRect(this.x, this.y, 50,50);
+			}
+
+			update() {
+				this.x = this.x + 10;
+			}
+
+			draw() {
+				this.ctx.fillRect(this.x, this.y, 50, 50);
+			}
+
+		}
+		
+		//Déclaration du canvas
+		var canvas = document.getElementById("canvas");
+		this.canvas.height = 1000;
+		this.canvas.width = window.innerWidth;
+		if(canvas.getContext) {
+			var ctx = canvas.getContext("2d");	
+		}
+
+		//Timer depuis le début
+		var timeSinceStart = 0;
+
+		//Déclaration du carré
+		var carre1 = new Carre(ctx, 50, 100);
+		var carre2 = new Carre(ctx, 150, 200);
+		var carre3 = new Carre(ctx, 250, 300);
+		var carre4 = new Carre(ctx, 350, 400);
+		var carre5 = new Carre(ctx, 450, 500);
+		var carre6 = new Carre(ctx, 550, 600);
+		var carre7 = new Carre(ctx, 650, 700);
+		var carre8 = new Carre(ctx, 750, 800);
+		var carre9 = new Carre(ctx, 850, 900);
+		var carre10 = new Carre(ctx, 950, 1000);
+
+		//Mouvement
+		var timer = window.setInterval(test, 10);
+
+		function test() {
+			timeSinceStart++;
+			carre1.move(timeSinceStart);
+			carre2.move(timeSinceStart);
+			carre3.move(timeSinceStart);
+			carre4.move(timeSinceStart);
+			carre5.move(timeSinceStart);
+			carre6.move(timeSinceStart);
+			carre7.move(timeSinceStart);
+			carre8.move(timeSinceStart);
+			carre9.move(timeSinceStart);
+			carre10.move(timeSinceStart);
+		}
+
+	</script>
+
+</html>

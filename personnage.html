@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<hml>
+    
+    <header>
+        
+        <title>personnage</title>
+
+    </header>
+
+    <body>
+
+        <canvas id='canvas'></canvas>
+
+    </body>
+
+    <script>
+
+        class Personnage {
+            constructor(ctx) {
+                this.ctx = ctx;
+                this.image = new Image();
+                this.image.src = 'image/hero_walk_cycle_spritesheet_by_mrnoobtastic-d3defej.png'
+                this.direction  = 0;
+                this.frame = 0;
+                this.x = 0;
+                this.y = 0;
+            }
+
+            clear() {
+                this.ctx.clearRect(0,0,window.innerHeight, window.innerWidth);
+            }
+
+            update() {
+
+            }
+
+            draw() {
+                this.ctx.drawImage(this.image, 128*this.frame, 128*this.direction, 128, 128, this.x, this.y, 128, 128);
+            }
+        } 
+
+        var canvas = document.getElementById("canvas");
+        this.canvas.height = window.innerHeight;
+        this.canvas.width = window.innerWidth;
+        if(canvas.getContext) {
+            var ctx = canvas.getContext("2d");  
+        }
+        var personnage = new Personnage(ctx);
+        personnage.image.onload = function() {
+            personnage.ctx.drawImage(personnage.image, 0, 0, 128, 128, 100, 100, 128, 128);
+        }
+        var compteur = 0;
+
+        window.addEventListener('keydown', function(event) {
+            if (event.defaultPrevented) {
+                return;
+            }
+
+            switch (event.key) {
+                case "ArrowDown":
+                    personnage.direction = 2;
+                    personnage.y = personnage.y + 10;
+                    break;
+                case "ArrowUp":
+                    personnage.direction = 3;
+                    personnage.y = personnage.y - 10;
+                    break;
+                case "ArrowLeft":
+                    personnage.direction = 0;
+                    personnage.x = personnage.x - 10;
+                    break;
+                case "ArrowRight":
+                    personnage.direction = 1;
+                    personnage.x = personnage.x + 10;
+                    break;
+                default:
+                    return;
+                }
+        })
+
+        var mainloop = function() {
+            if (compteur == 20) {
+                compteur = 0;
+                if (personnage.frame < 3) {
+                    personnage.frame++;
+                } else {
+                    personnage.frame = 0;
+                }
+            } else {
+                compteur++;
+            }
+            personnage.clear();
+            personnage.update();
+            personnage.draw();
+        };
+
+        var animFrame = window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame    ||
+                window.oRequestAnimationFrame      ||
+                window.msRequestAnimationFrame     ||
+                null ;
+
+        var recursiveAnim = function() {
+            mainloop();
+            animFrame(recursiveAnim);
+        };
+
+        // start the mainloop
+        animFrame(recursiveAnim);
+
+    </script>
+
+</hml>
+	
